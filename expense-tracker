@@ -1,0 +1,19 @@
+# 💰 Expense Tracker
+
+A full-stack web application to track daily expenses with user authentication, category filtering, and monthly summaries.
+
+## 🚀 Features
+
+- User Registration & Login
+- Add, View, and Delete Expenses
+- Category-wise filtering (Food, Travel, Shopping, Education)
+- Monthly expense summary
+- Responsive and clean UI
+
+## 🛠️ Tech Stack
+
+- **Frontend:** HTML5, CSS3, JavaScript
+- **Storage:** localStorage (Browser)
+- **Tools:** Git, GitHub, VS Code
+
+## 📁 Project Structure
