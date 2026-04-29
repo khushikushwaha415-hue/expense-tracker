@@ -1,3 +1,5 @@
+const API_URL = 'http://localhost:5000/api';
+
 // Tab switch
 function showTab(tab) {
     document.getElementById('login').style.display = tab === 'login' ? 'block' : 'none';
@@ -7,7 +9,6 @@ function showTab(tab) {
         btn.classList.toggle('active', (tab === 'login' && i === 0) || (tab === 'register' && i === 1));
     });
 
-    // Bottom link update
     const bottomLink = document.getElementById('bottom-link');
     if (tab === 'login') {
         bottomLink.innerHTML = 'Don\'t have an account? <span style="color:#1565c0; cursor:pointer;" onclick="showTab(\'register\')">Register</span>';
@@ -17,11 +18,14 @@ function showTab(tab) {
 }
 
 // Register
-function registerUser() {
+async function registerUser() {
     const name = document.getElementById('reg-name').value.trim();
     const email = document.getElementById('reg-email').value.trim();
     const password = document.getElementById('reg-password').value.trim();
     const error = document.getElementById('register-error');
+
+    error.style.color = 'red';
+    error.textContent = '';
 
     if (!name || !email || !password) {
         error.textContent = 'Please fill all fields!';
@@ -32,40 +36,63 @@ function registerUser() {
         return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const exists = users.find(u => u.email === email);
-    if (exists) {
-        error.textContent = 'This email is already registered!';
-        return;
+    try {
+        const response = await fetch(`${API_URL}/auth/register`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, email, password })
+        });
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            error.textContent = data.message;
+            return;
+        }
+
+        error.style.color = 'green';
+        error.textContent = 'Registration successful! Please login now.';
+        setTimeout(() => showTab('login'), 1500);
+
+    } catch (err) {
+        error.textContent = 'Server error! Make sure backend is running.';
     }
-
-    users.push({ name, email, password });
-    localStorage.setItem('users', JSON.stringify(users));
-    error.style.color = 'green';
-    error.textContent = 'Registration successful! Please login now.';
-
-    setTimeout(() => showTab('login'), 1500);
 }
 
 // Login
-function loginUser() {
+async function loginUser() {
     const email = document.getElementById('login-email').value.trim();
     const password = document.getElementById('login-password').value.trim();
     const error = document.getElementById('login-error');
+
+    error.style.color = 'red';
+    error.textContent = '';
 
     if (!email || !password) {
         error.textContent = 'Please enter email and password!';
         return;
     }
 
-    const users = JSON.parse(localStorage.getItem('users') || '[]');
-    const user = users.find(u => u.email === email && u.password === password);
+    try {
+        const response = await fetch(`${API_URL}/auth/login`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+        });
 
-    if (!user) {
-        error.textContent = 'Invalid email or password!';
-        return;
+        const data = await response.json();
+
+        if (!response.ok) {
+            error.textContent = data.message;
+            return;
+        }
+
+        // Save token
+        localStorage.setItem('token', data.token);
+        localStorage.setItem('userName', data.name);
+        window.location.href = 'dashboard.html';
+
+    } catch (err) {
+        error.textContent = 'Server error! Make sure backend is running.';
     }
-
-    localStorage.setItem('loggedInUser', JSON.stringify(user));
-    window.location.href = 'dashboard.html';
 }

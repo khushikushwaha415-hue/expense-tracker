@@ -1,25 +1,29 @@
+const API_URL = 'http://localhost:5000/api';
+
 // Check login
 window.onload = function() {
-    const user = JSON.parse(localStorage.getItem('loggedInUser'));
-    if (!user) {
+    const token = localStorage.getItem('token');
+    if (!token) {
         window.location.href = 'index.html';
         return;
     }
-    document.getElementById('welcome-msg').textContent = 'Welcome, ' + user.name;
+    const userName = localStorage.getItem('userName');
+    document.getElementById('welcome-msg').textContent = 'Welcome, ' + userName;
 
-    // Set today's date as default
+    // Set today's date
     const today = new Date().toISOString().split('T')[0];
     document.getElementById('date').value = today;
 };
 
 // Logout
 function logout() {
-    localStorage.removeItem('loggedInUser');
+    localStorage.removeItem('token');
+    localStorage.removeItem('userName');
     window.location.href = 'index.html';
 }
 
 // Add Expense
-function addExpense() {
+async function addExpense() {
     const description = document.getElementById('description').value.trim();
     const amount = document.getElementById('amount').value.trim();
     const category = document.getElementById('category').value;
@@ -30,7 +34,6 @@ function addExpense() {
     error.textContent = '';
     success.textContent = '';
 
-    // Validation
     if (!description || !amount || !category || !date) {
         error.textContent = 'Please fill all fields!';
         return;
@@ -40,31 +43,44 @@ function addExpense() {
         return;
     }
 
-    // Save to localStorage
-    const expenses = JSON.parse(localStorage.getItem('expenses') || '[]');
-    const newExpense = {
-        id: Date.now(),
-        description,
-        amount: parseFloat(amount),
-        category,
-        date
-    };
+    const token = localStorage.getItem('token');
 
-    expenses.push(newExpense);
-    localStorage.setItem('expenses', JSON.stringify(expenses));
+    try {
+        const response = await fetch(`${API_URL}/expenses`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({
+                description,
+                amount: parseFloat(amount),
+                category,
+                date
+            })
+        });
 
-    // Show success
-    success.textContent = 'Expense added successfully!';
+        const data = await response.json();
 
-    // Clear form
-    document.getElementById('description').value = '';
-    document.getElementById('amount').value = '';
-    document.getElementById('category').value = '';
-    const today = new Date().toISOString().split('T')[0];
-    document.getElementById('date').value = today;
+        if (!response.ok) {
+            error.textContent = data.message;
+            return;
+        }
 
-    // Redirect to dashboard after 1.5 seconds
-    setTimeout(() => {
-        window.location.href = 'dashboard.html';
-    }, 1500);
+        success.textContent = 'Expense added successfully!';
+
+        // Clear form
+        document.getElementById('description').value = '';
+        document.getElementById('amount').value = '';
+        document.getElementById('category').value = '';
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').value = today;
+
+        setTimeout(() => {
+            window.location.href = 'dashboard.html';
+        }, 1500);
+
+    } catch (err) {
+        error.textContent = 'Server error! Make sure backend is running.';
+    }
 }
