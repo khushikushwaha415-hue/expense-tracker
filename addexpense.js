@@ -1,6 +1,7 @@
 const API_URL = 'https://expense-tracker-api-ybls.onrender.com/api';
 
 
+
 // Check login
 window.onload = function() {
     const token = localStorage.getItem('token');

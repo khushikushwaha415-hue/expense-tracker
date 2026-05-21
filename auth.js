@@ -1,5 +1,6 @@
 const API_URL = 'https://expense-tracker-api-ybls.onrender.com/api';
 
+
 // Tab switch
 function showTab(tab) {
     document.getElementById('login').style.display = tab === 'login' ? 'block' : 'none';
