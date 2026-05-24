@@ -7,10 +7,12 @@
     <title>Add Expense - ExpenseTracker</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="addexpense.css">
+    <link rel="stylesheet" href="add-expense.css">
 </head>
 
 <body>
+
+    <!-- Navbar -->
     <nav class="navbar">
         <span class="logo">💰 ExpenseTracker</span>
         <div class="nav-right">
@@ -18,20 +20,25 @@
             <button onclick="logout()">Logout</button>
         </div>
     </nav>
+
     <div class="form-container">
         <div class="form-card">
+
             <div class="form-top">
                 <h2>Add New Expense</h2>
                 <button class="btn-back" onclick="window.location.href='dashboard.html'">← Back</button>
             </div>
+
             <div class="form-group">
                 <label>Description</label>
                 <input type="text" id="description" placeholder="e.g. Grocery shopping">
             </div>
+
             <div class="form-group">
                 <label>Amount (₹)</label>
                 <input type="number" id="amount" placeholder="e.g. 500" min="1">
             </div>
+
             <div class="form-group">
                 <label>Category</label>
                 <select id="category">
@@ -43,15 +50,20 @@
           <option value="Other">Other</option>
         </select>
             </div>
+
             <div class="form-group">
                 <label>Date</label>
                 <input type="date" id="date">
             </div>
+
             <p id="form-error" class="error-msg"></p>
             <p id="form-success" class="success-msg"></p>
+
             <button class="btn-submit" onclick="addExpense()">Add Expense</button>
+
         </div>
     </div>
+
     <script src="addexpense.js"></script>
 </body>
 
