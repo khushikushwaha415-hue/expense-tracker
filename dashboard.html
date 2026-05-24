@@ -5,13 +5,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - ExpenseTracker</title>
-
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="dashboard.css">
 </head>
 
 <body>
-
-    <!-- Navbar -->
     <nav class="navbar">
         <span class="logo">💰 ExpenseTracker</span>
         <div class="nav-right">
@@ -19,10 +17,7 @@
             <button onclick="logout()">Logout</button>
         </div>
     </nav>
-
     <div class="dashboard-container">
-
-        <!-- Summary Cards -->
         <div class="cards-grid">
             <div class="card">
                 <p class="card-label">Total Expenses</p>
@@ -37,8 +32,6 @@
                 <p class="card-value blue" id="total-entries">0</p>
             </div>
         </div>
-
-        <!-- Filters + Add Button -->
         <div class="table-header">
             <div class="filters">
                 <select id="filter-category" onchange="renderExpenses()">
@@ -57,8 +50,6 @@
             </div>
             <button class="btn-add" onclick="window.location.href='add-expense.html'">+ Add Expense</button>
         </div>
-
-        <!-- Expense Table -->
         <div class="table-wrapper">
             <div class="table-head">
                 <span>Description</span>
@@ -67,17 +58,13 @@
                 <span>Amount</span>
                 <span>Action</span>
             </div>
-            <div id="expense-list">
-                <!-- Expenses will load here -->
-            </div>
+            <div id="expense-list"></div>
             <div id="no-expenses" class="no-data" style="display:none;">
                 No expenses found. Click "+ Add Expense" to get started!
             </div>
         </div>
-
     </div>
-
-    <script src="addexpense.js"></script>
+    <script src="dashboard.js"></script>
 </body>
 
 </html>
