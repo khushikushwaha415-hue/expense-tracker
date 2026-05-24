@@ -6,54 +6,66 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ExpenseTracker</title>
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
-    <div class="auth-container">
-        <div class="auth-card">
-            <div class="auth-header">
-                <span class="auth-logo">💰</span>
-                <h1>ExpenseTracker</h1>
+
+    <div class="container">
+        <div class="auth-box">
+
+            <!-- Header -->
+            <div class="header">
+                <h1>💰 ExpenseTracker</h1>
                 <p>Manage your expenses smartly</p>
             </div>
+
+            <!-- Tabs -->
             <div class="tabs">
                 <button class="tab active" onclick="showTab('login')">Login</button>
                 <button class="tab" onclick="showTab('register')">Register</button>
             </div>
-            <div id="login">
+
+            <!-- Login Form -->
+            <div id="login" class="form-section">
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="login-email" placeholder="Enter your email">
+                    <input type="email" id="login-email" placeholder="khushi@email.com">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="login-password" placeholder="Enter your password">
+                    <input type="password" id="login-password" placeholder="••••••••">
                 </div>
                 <p id="login-error" class="error-msg"></p>
                 <button class="btn-primary" onclick="loginUser()">Login</button>
             </div>
-            <div id="register" style="display:none;">
+
+            <!-- Register Form -->
+            <div id="register" class="form-section" style="display:none;">
                 <div class="form-group">
-                    <label>Name</label>
-                    <input type="text" id="reg-name" placeholder="Enter your name">
+                    <label>Full Name</label>
+                    <input type="text" id="reg-name" placeholder="Khushi">
                 </div>
                 <div class="form-group">
                     <label>Email</label>
-                    <input type="email" id="reg-email" placeholder="Enter your email">
+                    <input type="email" id="reg-email" placeholder="khushi@email.com">
                 </div>
                 <div class="form-group">
                     <label>Password</label>
-                    <input type="password" id="reg-password" placeholder="Min 6 characters">
+                    <input type="password" id="reg-password" placeholder="••••••••">
                 </div>
                 <p id="register-error" class="error-msg"></p>
                 <button class="btn-primary" onclick="registerUser()">Register</button>
             </div>
-            <p id="bottom-link" style="text-align:center; margin-top:1rem; font-size:13px;">
-                Don't have an account? <span style="color:#1565c0; cursor:pointer;" onclick="showTab('register')">Register</span>
+
+            <!-- Bottom Link -->
+            <p id="bottom-link" style="text-align: center; font-size: 13px; color: #888; margin-top: 1rem;">
+                Don't have an account?
+                <span style="color: #1565c0; cursor: pointer;" onclick="showTab('register')">Register</span>
             </p>
+
         </div>
     </div>
+
     <script src="auth.js"></script>
 </body>
 

@@ -5,12 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard - ExpenseTracker</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="dashboard.css">
-
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/dashboard.css">
 </head>
 
 <body>
+
+    <!-- Navbar -->
     <nav class="navbar">
         <span class="logo">💰 ExpenseTracker</span>
         <div class="nav-right">
@@ -18,7 +19,10 @@
             <button onclick="logout()">Logout</button>
         </div>
     </nav>
+
     <div class="dashboard-container">
+
+        <!-- Summary Cards -->
         <div class="cards-grid">
             <div class="card">
                 <p class="card-label">Total Expenses</p>
@@ -33,24 +37,28 @@
                 <p class="card-value blue" id="total-entries">0</p>
             </div>
         </div>
+
+        <!-- Filters + Add Button -->
         <div class="table-header">
             <div class="filters">
                 <select id="filter-category" onchange="renderExpenses()">
-                    <option value="all">All Categories</option>
-                    <option value="Food">Food</option>
-                    <option value="Travel">Travel</option>
-                    <option value="Shopping">Shopping</option>
-                    <option value="Education">Education</option>
-                    <option value="Other">Other</option>
-                </select>
+          <option value="all">All Categories</option>
+          <option value="Food">Food</option>
+          <option value="Travel">Travel</option>
+          <option value="Shopping">Shopping</option>
+          <option value="Education">Education</option>
+          <option value="Other">Other</option>
+        </select>
                 <select id="filter-month" onchange="renderExpenses()">
-                    <option value="all">All Time</option>
-                    <option value="this">This Month</option>
-                    <option value="last">Last Month</option>
-                </select>
+          <option value="all">All Time</option>
+          <option value="this">This Month</option>
+          <option value="last">Last Month</option>
+        </select>
             </div>
             <button class="btn-add" onclick="window.location.href='add-expense.html'">+ Add Expense</button>
         </div>
+
+        <!-- Expense Table -->
         <div class="table-wrapper">
             <div class="table-head">
                 <span>Description</span>
@@ -59,13 +67,17 @@
                 <span>Amount</span>
                 <span>Action</span>
             </div>
-            <div id="expense-list"></div>
+            <div id="expense-list">
+                <!-- Expenses will load here -->
+            </div>
             <div id="no-expenses" class="no-data" style="display:none;">
                 No expenses found. Click "+ Add Expense" to get started!
             </div>
         </div>
+
     </div>
-    <script src="dashboard.js"></script>
+
+    <script src="js/expense.js"></script>
 </body>
 
 </html>
