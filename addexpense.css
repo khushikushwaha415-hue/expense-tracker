@@ -92,3 +92,37 @@
     margin-bottom: 8px;
     min-height: 16px;
 }
+
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+    .form-container {
+        margin-top: 120px;
+        padding: 0 12px;
+    }
+    .form-card {
+        padding: 1.4rem;
+        border-radius: 10px;
+    }
+    .form-top {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .form-top h2 {
+        font-size: 18px;
+    }
+    .btn-back {
+        width: 100%;
+    }
+    .form-group input,
+    .form-group select {
+        font-size: 13px;
+        padding: 10px;
+    }
+    .btn-submit {
+        font-size: 14px;
+        padding: 11px;
+    }
+}

@@ -59,7 +59,7 @@ body {
 
 .cards-grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 2fr 1fr 1fr 1fr 80px;
     gap: 12px;
     margin-bottom: 20px;
 }
@@ -192,4 +192,63 @@ body {
     padding: 2rem;
     color: #888;
     font-size: 14px;
+}
+
+
+/* ================= MOBILE RESPONSIVE ================= */
+
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 10px;
+        padding: 14px;
+        text-align: center;
+    }
+    .nav-right {
+        flex-direction: column;
+        gap: 8px;
+    }
+    .dashboard-container {
+        margin-top: 120px;
+        padding: 0 12px;
+    }
+    /* Cards */
+    .cards-grid {
+        grid-template-columns: 1fr;
+    }
+    .card-value {
+        font-size: 20px;
+    }
+    /* Filters + Button */
+    .table-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+    .filters {
+        flex-direction: column;
+        width: 100%;
+    }
+    .filters select {
+        width: 100%;
+    }
+    .btn-add {
+        width: 100%;
+    }
+    /* Table Scroll */
+    .table-wrapper {
+        overflow-x: auto;
+    }
+    .table-head,
+    .expense-row {
+        min-width: 650px;
+    }
+}
+
+
+/* Prevent horizontal body scroll */
+
+html,
+body {
+    overflow-x: hidden;
 }
